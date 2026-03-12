@@ -1,0 +1,17 @@
+{
+  "name": "ex-vc-upstream-parity",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.6.5",
+  "description": "Maintainer-only recorder for ex_vc upstream TS parity fixtures.",
+  "scripts": {
+    "record:released": "node record.js released",
+    "record:main": "node record.js main"
+  },
+  "dependencies": {
+    "@digitalbazaar/vc": "7.2.0",
+    "@digitalbazaar/data-integrity": "2.6.0",
+    "@digitalcredentials/sd-jwt-vc": "0.4.0"
+  }
+}
+

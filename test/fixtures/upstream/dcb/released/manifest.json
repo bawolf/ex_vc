@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "advisory": false,
+  "channel": "released",
+  "generatedAt": "2026-03-11T00:00:00Z",
+  "recorder": {
+    "name": "ex_vc_upstream_parity",
+    "packageManager": "pnpm"
+  },
+  "packages": {
+    "@digitalbazaar/vc": "7.2.0",
+    "@digitalbazaar/data-integrity": "2.6.0",
+    "@digitalcredentials/sd-jwt-vc": "0.4.0"
+  },
+  "cases": [
+    {
+      "id": "minimal-vc-validation",
+      "operation": "validate",
+      "file": "minimal-vc-validation.json"
+    }
+  ]
+}
+

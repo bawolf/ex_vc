@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "advisory": true,
+  "channel": "main",
+  "generatedAt": "2026-03-11T00:00:00Z",
+  "recorder": {
+    "name": "ex_vc_upstream_parity",
+    "packageManager": "pnpm"
+  },
+  "packages": {
+    "@digitalbazaar/vc": "7.2.0"
+  },
+  "cases": []
+}
+

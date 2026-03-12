@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "advisory": true,
+  "channel": "main",
+  "generatedAt": "2026-03-11T00:00:00Z",
+  "recorder": {
+    "name": "ex_vc_ssi_parity",
+    "packageManager": "cargo"
+  },
+  "packages": {
+    "spruceid/ssi": "unversioned-recorder-scaffold"
+  },
+  "cases": []
+}
