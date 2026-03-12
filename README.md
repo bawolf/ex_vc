@@ -46,7 +46,7 @@ Those toolchains are maintainer-only and reserved for refreshing parity fixtures
 ```elixir
 def deps do
   [
-    {:ex_vc, "~> 0.1.0"}
+    {:ex_vc, "~> 0.1.1"}
   ]
 end
 ```
@@ -181,10 +181,11 @@ standalone `ex_vc` repository for publishing and external consumption.
 The intended workflow is:
 
 1. make library changes in `libs/ex_vc`
-2. run `mix release.gate`
-3. sync the package into a clean checkout of `github.com/bawolf/ex_vc`
-4. review and push from the standalone repo
-5. trigger the publish workflow from the standalone repo
+2. run `mix ex_vc.release.gate`
+3. publish the corresponding `ex_did` dependency release first when `ex_vc` depends on a newer `ex_did` version
+4. sync the package into a clean checkout of `github.com/bawolf/ex_vc`
+5. review and push from the standalone repo
+6. trigger the publish workflow from the standalone repo
 
 A helper script for the sync step lives at `scripts/sync_standalone_repo.sh`.
 
@@ -233,5 +234,5 @@ repository secret in the standalone `ex_vc` repository.
 Run the local release gate with:
 
 ```bash
-mix release.gate
+mix ex_vc.release.gate
 ```

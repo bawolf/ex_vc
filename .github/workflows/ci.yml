@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -37,4 +34,4 @@ jobs:
         run: mix deps.get
 
       - name: Run release gate
-        run: mix release.gate
+        run: mix ex_vc.release.gate

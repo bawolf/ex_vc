@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Release.Gate do
+defmodule Mix.Tasks.ExVc.Release.Gate do
   use Mix.Task
 
   @shortdoc "Runs the ex_vc release gate checks"
@@ -28,7 +28,8 @@ defmodule Mix.Tasks.Release.Gate do
 
   @released_manifests [
     "test/fixtures/upstream/dcb/released/manifest.json",
-    "test/fixtures/upstream/ssi/released/manifest.json"
+    "test/fixtures/upstream/ssi/released/manifest.json",
+    "test/fixtures/divergences/released.json"
   ]
 
   @impl Mix.Task

@@ -48,3 +48,5 @@ Add or keep an explicit divergence only when:
 3. the difference is captured in a committed fixture, and
 4. the README, `INTEROP_NOTES.md`, and tests explain the exception.
 
+Released cross-oracle disagreements must also be listed in
+`test/fixtures/divergences/released.json`, even when that list is empty.

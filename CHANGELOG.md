@@ -7,6 +7,19 @@ and this project intends to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-03-12
+
+### Added
+- A released divergence manifest for DCB-vs-Spruce VC parity decisions, currently empty and enforced by tests.
+
+### Changed
+- Release 1 docs now consistently present `ex_vc` as a focused VC core, VP boundary, and `vc+jwt` package.
+- Release gates now require the divergence manifest alongside the released parity corpora.
+- Release workflow and checklist now explicitly depend on the corresponding `ex_did` release line.
+
+### Deferred
+- Data Integrity and SD-JWT VC remain in-tree for later parity work, but are still excluded from the public support contract.
+
 ## [0.1.0] - 2026-03-11
 
 ### Added
