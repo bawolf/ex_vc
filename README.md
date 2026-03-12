@@ -181,7 +181,7 @@ standalone `ex_vc` repository for publishing and external consumption.
 The intended workflow is:
 
 1. make library changes in `libs/ex_vc`
-2. run the release checks locally
+2. run `mix release.gate`
 3. sync the package into a clean checkout of `github.com/bawolf/ex_vc`
 4. review and push from the standalone repo
 5. trigger the publish workflow from the standalone repo
@@ -229,3 +229,9 @@ The publish workflow should be triggered through `workflow_dispatch` after the
 version and changelog are ready. It publishes to Hex first and then creates the
 matching Git tag and GitHub release automatically. It expects a `HEX_API_KEY`
 repository secret in the standalone `ex_vc` repository.
+
+Run the local release gate with:
+
+```bash
+mix release.gate
+```
