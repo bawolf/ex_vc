@@ -1,7 +1,7 @@
 defmodule ExVc.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
   @source_url "https://github.com/bawolf/ex_vc"
 
   def project do
@@ -55,7 +55,7 @@ defmodule ExVc.MixProject do
     if System.get_env("EX_VC_USE_LOCAL_DEPS") == "1" do
       {:ex_did, path: "../ex_did"}
     else
-      {:ex_did, "~> 0.2.0"}
+      {:ex_did, "~> 0.1.2"}
     end
   end
 

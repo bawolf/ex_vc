@@ -38,10 +38,19 @@ upstream-recorded parity evidence:
 - SD-JWT VC disclosure and key-binding interoperability
 - broader proof-bearing VP interoperability
 
+## Decision Log
+
+Released VC envelope validation currently has no documented DCB-vs-Spruce
+divergences. The released divergence manifest lives at
+`test/fixtures/divergences/released.json` and must stay empty until a real
+cross-oracle disagreement is introduced and explicitly decided.
+
 ## Policy
 
 - Do not claim released parity for a surface unless it has committed DCB and/or
   Spruce released fixtures that exercise that exact behavior.
+- Every released DCB-vs-Spruce disagreement must have a committed divergence
+  entry and a documented winning contract.
 - If Rust and TypeScript references diverge, `ex_vc` chooses one explicit
   behavior, records the divergence in fixtures, and documents it here.
 - Advisory `main` fixtures are for drift detection only.

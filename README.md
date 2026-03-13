@@ -8,6 +8,32 @@
 
 Quick links: [Hex package](https://hex.pm/packages/ex_vc) | [Hex docs](https://hexdocs.pm/ex_vc) | [Supported features](https://github.com/bawolf/ex_vc/blob/main/SUPPORTED_FEATURES.md) | [Interop notes](https://github.com/bawolf/ex_vc/blob/main/INTEROP_NOTES.md) | [Fixture policy](https://github.com/bawolf/ex_vc/blob/main/FIXTURE_POLICY.md)
 
+## What Standard Is This?
+
+[Verifiable Credentials](https://www.w3.org/TR/vc-data-model-2.0/) are a way to
+package signed claims such as identity, authorization, affiliation, or
+delegation in a portable format. A credential says something like "issuer X
+asserts subject Y has property Z", and a verifier can check the signature and
+the credential rules.
+
+`ex_vc` implements the VC Data Model 2.0 core boundary for Elixir, with a
+release-1 focus on generic VC validation, Verifiable Presentation boundaries,
+and `vc+jwt`.
+
+If you want the formal standards context, start with:
+
+- [W3C Verifiable Credentials Data Model 2.0](https://www.w3.org/TR/vc-data-model-2.0/)
+- [W3C VC Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/)
+
+## Why You Might Use It
+
+Use `ex_vc` when you need to:
+
+- issue or verify signed credentials in an API-friendly way
+- validate generic VC envelopes before applying product-specific profile rules
+- verify `vc+jwt` credentials with direct keys or DIDs resolved through `ex_did`
+- load and validate Verifiable Presentations without pulling VC rules into your app
+
 Release 1 is intentionally narrow:
 
 - VC 2.0 credential normalization and validation
@@ -46,7 +72,7 @@ Those toolchains are maintainer-only and reserved for refreshing parity fixtures
 ```elixir
 def deps do
   [
-    {:ex_vc, "~> 0.1.0"}
+    {:ex_vc, "~> 0.1.1"}
   ]
 end
 ```
@@ -175,18 +201,33 @@ See:
 
 ## Maintainer Workflow
 
-`ex_vc` currently lives in the `delegate` monorepo and is mirrored into the
-standalone `ex_vc` repository for publishing and external consumption.
+`ex_vc` is developed in the `delegate` monorepo. The public
+`github.com/bawolf/ex_vc` repository is the mirrored OSS surface for issues,
+discussions, releases, and Hex publishing.
+
+The monorepo copy is authoritative for:
+
+- code
+- tests and fixtures
+- docs
+- GitHub workflows
+- release tooling
+
+Direct standalone-repo edits are temporary hotfixes only and must be
+backported to the monorepo immediately.
 
 The intended workflow is:
 
 1. make library changes in `libs/ex_vc`
-2. run `mix release.gate`
-3. sync the package into a clean checkout of `github.com/bawolf/ex_vc`
-4. review and push from the standalone repo
-5. trigger the publish workflow from the standalone repo
+2. run `scripts/release_preflight.sh`
+3. publish the corresponding `ex_did` dependency release first when `ex_vc` depends on a newer `ex_did` version
+4. sync the package into a clean checkout of `github.com/bawolf/ex_vc`
+5. verify the mirrored required file set with `scripts/verify_standalone_repo.sh`
+6. review and push from the standalone repo
+7. trigger the publish workflow from the standalone repo
 
-A helper script for the sync step lives at `scripts/sync_standalone_repo.sh`.
+A helper to sync all public package repos from the monorepo lives at
+`/Users/bryantwolf/workspace/delegate/scripts/sync_public_libs.sh`.
 
 The standalone repository should carry GitHub Actions workflows for:
 
@@ -230,8 +271,29 @@ version and changelog are ready. It publishes to Hex first and then creates the
 matching Git tag and GitHub release automatically. It expects a `HEX_API_KEY`
 repository secret in the standalone `ex_vc` repository.
 
-Run the local release gate with:
+## Releasing From GitHub
+
+Releases are cut from the public `github.com/bawolf/ex_vc` repository, not from
+the private monorepo checkout.
+
+The shortest safe path is:
+
+1. finish the change in `libs/ex_vc`
+2. run `scripts/release_preflight.sh`
+3. if `mix.exs` points at a newer `ex_did`, publish `ex_did` first
+4. sync and verify the standalone repo with `scripts/sync_standalone_repo.sh` and `scripts/verify_standalone_repo.sh`
+5. push the mirrored release commit to `main` in `github.com/bawolf/ex_vc`
+6. in GitHub, go to `Actions`, choose `Publish`, and run it with the version from `mix.exs`
+
+The GitHub workflow is responsible for:
+
+- rerunning the release gate
+- publishing to Hex
+- creating the matching git tag
+- creating the matching GitHub release
+
+Run the local preflight with:
 
 ```bash
-mix release.gate
+scripts/release_preflight.sh
 ```
